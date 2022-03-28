@@ -29,5 +29,4 @@ public class SqlSession {
         return configuration.getMapper(clazz, this);
     }
 
-
 }
