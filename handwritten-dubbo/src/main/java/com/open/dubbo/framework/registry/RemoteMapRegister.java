@@ -29,12 +29,13 @@ public class RemoteMapRegister {
 
     public static List<URL> get(String interfaceName) {
 
-        REGISTER = getFile();
+        //REGISTER = getFile();
         return REGISTER.get(interfaceName);
     }
 
     public static void saveFile() {
-
+        // 由于生产者和消费者是两个线程 REGISTER不是同一个备份
+        // 这里模拟 文件持久化 保证一致
     }
 
     public static Map<String, List<URL>> getFile() {

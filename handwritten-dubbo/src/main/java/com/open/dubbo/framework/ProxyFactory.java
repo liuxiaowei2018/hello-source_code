@@ -28,8 +28,16 @@ public class ProxyFactory {
                     //HttpClient httpClient = new HttpClient();
                     Invocation invocation = new Invocation(interfaceClass.getName(), method.getName(), method.getParameterTypes(), args);
 
+                    //这里需要考虑本地缓存进行性能优化  同时要考虑缓存数据一致性
+                    // 例如 zookeeper的watch模式 redis的发布订阅模式 保证数据一致性
+                    /*if (cache) {
+                        List<URL> urls = cache.get();
+                    }*/
+
                     // zookeeper 配置中心
                     List<URL> urls = RemoteMapRegister.get(interfaceClass.getName());
+
+                    //cache.put(urls);
 
                     // 负载均衡
                     URL url = LoadBalance.random(urls);
